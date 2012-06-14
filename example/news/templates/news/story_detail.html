@@ -1,0 +1,18 @@
+{% extends "site_base.html" %}
+
+{% block content %}
+	<div class="story">
+		<div class="page-header">
+			<h1>{{ story_item.title }}</h1>
+		</div>
+
+
+		{{ story_item.body|safe }}
+
+		<p class="meta">
+			Published on {{ story_item.created }}.
+			<a href="{{ story_item.get_absolute_url }}">Permalink</a>.
+		</p>
+
+	</div>
+{% endblock %}

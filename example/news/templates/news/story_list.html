@@ -1,0 +1,35 @@
+{% extends "site_base.html" %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>Latest stories</h1>
+    </div>
+
+    {% if story_of_the_day or story_of_the_week %}
+        <div class="hero-unit story-of-the-moment">
+            {% if story_of_the_day %}
+                <div class="story story-of-the-day">
+                    <h2>Story of the day: {{ story_of_the_day.title }}</h2>
+                    {{ story_of_the_day.body|safe|truncatewords_html:50 }}
+                    <p class="meta"><a href="{{ story_of_the_day.get_absolute_url }}">Read more...</a></p>
+                </div>
+            {% endif %}
+            {% if story_of_the_week %}
+                <div class="story story-of-the-day">
+                    <h2>Story of the week: {{ story_of_the_week.title }}</h2>
+                    {{ story_of_the_week.body|safe|truncatewords_html:50 }}
+                    <p class="meta"><a href="{{ story_of_the_week.get_absolute_url }}">Read more...</a></p>
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    {% for story in story_list %}
+        <div class="story">
+            <h2>{{ story.title }}</h2>
+            {{ story.body|safe|truncatewords_html:50 }}
+            <p class="meta"><a href="{{ story.get_absolute_url }}">Read more...</a></p>
+        </div>
+    {% endfor %}
+
+{% endblock %}
