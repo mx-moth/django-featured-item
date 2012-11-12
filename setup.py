@@ -9,7 +9,7 @@ except ImportError:
 
 setup(
     name='django-featured-item',
-    version="0.1.0",
+    version="0.2.0",
     description='Mark a single record in a model as featured',
     author='Tim Heap',
     author_email='heap.tim@gmail.com',
