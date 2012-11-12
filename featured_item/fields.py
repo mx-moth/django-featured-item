@@ -4,8 +4,8 @@ from django.db.models.signals import post_save
 
 class FeaturedField(models.BooleanField):
 
-    def __init__(self, unique_on=(), *args, **kwargs):
-        super(FeaturedField, self).__init__(*args, **kwargs)
+    def __init__(self, unique_on=(), default=False, *args, **kwargs):
+        super(FeaturedField, self).__init__(*args, default=default, **kwargs)
 
         self.unique_on = unique_on
 
@@ -38,8 +38,8 @@ class FeaturedField(models.BooleanField):
             old, new = getattr(instance, cache_name)
         except AttributeError:
             old, new = value, None
-        else:
-            new = value
+
+        new = value
 
         setattr(instance, cache_name, (old, new))
 
