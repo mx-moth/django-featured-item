@@ -43,3 +43,19 @@ You can have multiple `FeaturedField`s per model:
 
 		home_page_feature = FeaturedField()
 		side_bar_feature = FeaturedField()
+
+A featured item field can be unique amongst a subset of the collection, by
+using the `unique_on` option. In the following example, each `Author` can have
+one featured `Book`. There could be multiple featured `Book`s in the whole
+collection, but only one per `Author`:
+
+	from django.db import models
+	from featured_items.fields import FeaturedField
+
+	class Author(models.Model):
+		name = models.CharField(max_length=255)
+
+	class Book(models.Model):
+		name = models.CharField(max_length=255)
+		author = models.ForeignKey(Author)
+		featured = FeaturedField(unique_on=('author'))

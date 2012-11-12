@@ -4,8 +4,10 @@ from django.db.models.signals import post_save
 
 class FeaturedField(models.BooleanField):
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, unique_on=(), *args, **kwargs):
         super(FeaturedField, self).__init__(*args, **kwargs)
+
+        self.unique_on = unique_on
 
     def contribute_to_class(self, cls, name):
         super(FeaturedField, self).contribute_to_class(cls, name)
@@ -74,7 +76,10 @@ class FeaturedField(models.BooleanField):
         Model = type(instance)
         qs = Model._default_manager
         qs = qs.exclude(pk=instance.pk).filter(**{self.name: True})
+        for field_name in self.unique_on:
+            qs = qs.filter(**{field_name: getattr(instance, field_name)})
 
+        # Un-feature any records currently featured
         qs.update(**{self.name: False})
 
         setattr(instance, cache_name, (new_value, new_value))
