@@ -3,7 +3,7 @@ import datetime
 from django.db import models
 from django.core.urlresolvers import reverse
 
-from featured_item.fields import FeaturedField
+from featureditem.fields import FeaturedField
 
 class Story(models.Model):
 

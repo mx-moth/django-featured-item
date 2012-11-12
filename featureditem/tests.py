@@ -1,7 +1,7 @@
 from django.db import models
 from django.test import TestCase
 
-from featured_item.fields import FeaturedField
+from featureditem.fields import FeaturedField
 
 
 class SingleFeature(models.Model):

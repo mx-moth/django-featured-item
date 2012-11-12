@@ -102,7 +102,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
 
-    'featured_item',
+    'featureditem',
 
     'webapp',
     'news',
