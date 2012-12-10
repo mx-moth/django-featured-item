@@ -4,6 +4,8 @@ from django.db.models.signals import post_save
 
 class FeaturedField(models.BooleanField):
 
+    self.unique_on = None
+
     def __init__(self, unique_on=(), default=False, *args, **kwargs):
         super(FeaturedField, self).__init__(*args, default=default, **kwargs)
 
@@ -83,3 +85,9 @@ class FeaturedField(models.BooleanField):
         qs.update(**{self.name: False})
 
         setattr(instance, cache_name, (new_value, new_value))
+
+    def south_field_triple(self):
+        from south.modelsinspector import introspector
+        args, kwargs = introspector(self)
+        kwargs['unique_on'] = self.unique_on
+        return ('featureditem.fields.FeaturedField', args, kwargs)
