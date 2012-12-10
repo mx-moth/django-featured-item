@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 
 class FeaturedField(models.BooleanField):
 
-    self.unique_on = None
+    unique_on = None
 
     def __init__(self, unique_on=(), default=False, *args, **kwargs):
         super(FeaturedField, self).__init__(*args, default=default, **kwargs)
